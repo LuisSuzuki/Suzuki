@@ -12,3 +12,4 @@ struct funcionario{
 };
 
 struct funcionario funci;
+
