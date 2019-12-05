@@ -2,13 +2,43 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-#define TAMMAX 100
 
 struct funcionario{
-    float salario;
     char nome[50];
     char telefone[11];
     char email[40];
+    float salario;
 };
 
-struct funcionario funci;
+void cadastrarFunc(){
+
+    FILE *funcFile;
+    funcFile = fopen("C:\\Users\\Luis\\Desktop\\ELOGIOS\\funcionarios.txt", "a");
+    
+    struct funcionario cadastro;
+    
+    printf(" -------------------------------------------------------\n");
+    printf("|                                                       |\n");
+    printf("|                CADASTRAR FUNCIONARIO                  |\n");
+    printf("|                                                       |\n");
+    prinrf(" -------------------------------------------------------\n\n");
+    
+    printf("        Nome....: ");
+    scanf("%s", cadastro.nome);
+    
+    printf("        Telefone: ");
+    scanf("%s", cadastro.telefone);
+    
+    printf("        E-mail..: ");
+    scanf("%s", cadastro.email);
+    
+    printf("        Salario.: ");
+    scanf("%f", cadastro.salario);
+
+    fwrite (&cadastro, sizeof(struct funcionario), 1, funcFile);
+    if(&fwrite == 0){ /* Se conseguir gravar */
+		printf("ERRO");
+	}else{
+		printf("SUCESSO");
+    fclose(funcFile);
+}
