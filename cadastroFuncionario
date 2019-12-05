@@ -2,43 +2,147 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+//#include "excluir.c"
+
+FILE *funcFile;
 
 struct funcionario{
     char nome[50];
     char telefone[11];
     char email[40];
-    float salario;
+    char salario[10];
 };
+
+void remover(){
+ FILE *FuncFile;
+ struct funcionario cad;
+ char cpf[11];
+ int confirma = 0;
+ int compare;
+
+printf("Informe o Nome a ser excluido:");
+scanf("%s", &cpf);
+
+ FuncFile = fopen("C:\\Users\\Luis\\Desktop\\ELOGIOS\\funcionarios.txt","r");
+
+ FILE *FuncTemp;
+ FuncTemp = fopen("C:\\Users\\Luis\\Desktop\\ELOGIOS\\funcionariosTemp.txt","w");
+
+ while(fread(&cad, sizeof(struct funcionario),1,FuncFile)){
+
+     compare = strcmp(cad.nome, cpf);
+
+     if(compare != 0){
+         fwrite(&cad, sizeof(struct funcionario),1,FuncTemp);
+     }else{
+         printf("Tem certeza que deseja excluir o %s? [1] Sim [0] Nao: ", cad.nome);
+         scanf("%d", &confirma);
+        if(confirma == 1){
+            printf("                     Funcionario Excluido com sucesso!!");
+        }else{
+            fwrite(&cad, sizeof(struct funcionario),1,FuncTemp);
+            printf("                      Exclusao cancelada!!");
+        }
+
+     }
+ }
+}
 
 void cadastrarFunc(){
 
-    FILE *funcFile;
-    funcFile = fopen("C:\\Users\\Luis\\Desktop\\ELOGIOS\\funcionarios.txt", "a");
-    
-    struct funcionario cadastro;
-    
-    printf(" -------------------------------------------------------\n");
-    printf("|                                                       |\n");
-    printf("|                CADASTRAR FUNCIONARIO                  |\n");
-    printf("|                                                       |\n");
-    prinrf(" -------------------------------------------------------\n\n");
-    
-    printf("        Nome....: ");
-    scanf("%s", cadastro.nome);
-    
-    printf("        Telefone: ");
-    scanf("%s", cadastro.telefone);
-    
-    printf("        E-mail..: ");
-    scanf("%s", cadastro.email);
-    
-    printf("        Salario.: ");
-    scanf("%f", &cadastro.salario);
+    struct funcionario{
+    char nome[50];
+    char telefone[11];
+    char email[40];
+    char salario[10];
+};
 
-    fwrite (&cadastro, sizeof(struct funcionario), 1, funcFile);
-    if(&fwrite == 0){ /* Se conseguir gravar */
-		printf("ERRO");
-	}else{
-		printf("SUCESSO");
+    funcFile = fopen("C:\\Users\\Luis\\Desktop\\ELOGIOS\\funcionarios.txt", "a");
+
+    struct funcionario cad;
+
+    printf(" -----------------------------------------------------------------------------------\n");
+    printf("|                                                                                   |\n");
+    printf("|                                 CADASTRAR FUNCIONARIO                             |\n");
+    printf("|                                                                                   |\n");
+    printf(" -----------------------------------------------------------------------------------\n\n");
+
+    printf("        Nome....: ");
+    scanf("%s", &cad.nome);
+    fflush(stdin);
+
+    printf("        Telefone: ");
+    scanf("%s", &cad.telefone);
+    fflush(stdin);
+
+    printf("        E-mail..: ");
+    scanf("%s", &cad.email);
+    fflush(stdin);
+
+    printf("        Salario.: ");
+    scanf("%s", &cad.salario);
+    fflush(stdin);
+
+    fwrite(&cad, sizeof(struct funcionario), 1, funcFile);
     fclose(funcFile);
 }
+
+void exibirFunc(){
+
+FILE *visFile;
+    struct funcionario input;
+    visFile = fopen("C:\\Users\\Luis\\Desktop\\ELOGIOS\\funcionarios.txt", "r");
+
+printf("   ----------------------------- Funcionarios -----------------------------\n\n");
+
+    while(fread(&input, sizeof(struct funcionario), 1, visFile)){
+
+        printf("\nNome....: %s", input.nome);
+        printf("\nTelefone: %s", input.telefone);
+        printf("\nE-mail..: %s", input.email);
+        printf("\nSalario.: R$ %s\n", input.salario);
+	}
+
+    fclose (visFile);
+
+}
+
+int main() {
+
+    struct funcionario cad;
+    int escolha;
+
+    printf("   ---------------------------------------------------------------------------------\n");
+    printf("  |                                FUNCIONARIOS:                                    |\n");
+    printf("  |                                                                                 |\n");
+    printf("  |         (1) Cadastrar funcionario                (2) Exibir funcionarios        |\n");
+    printf("  |         (3) Excluir funcionario                  (4) Voltar                     |\n");
+    printf("   ---------------------------------------------------------------------------------\n");
+    printf("\n \n Digite uma das opcoes acima: ");
+    scanf("%d", &escolha);
+
+    switch(escolha)
+
+    {
+
+    case 1:
+
+    cadastrarFunc();
+    break;
+
+    case 2:
+
+    exibirFunc();
+
+    break;
+
+
+    case 3:
+    remover();
+
+    break;
+
+    }
+}
+
+
