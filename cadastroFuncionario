@@ -4,4 +4,9 @@
 #include <string.h>
 #define TAMMAX 100
 
-int pipi
+struct funcionario{
+    double salario;
+    char nome[50];
+    char telefone[11];
+    char email[40];
+};
