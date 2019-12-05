@@ -33,7 +33,7 @@ void cadastrarFunc(){
     scanf("%s", cadastro.email);
     
     printf("        Salario.: ");
-    scanf("%f", cadastro.salario);
+    scanf("%f", &cadastro.salario);
 
     fwrite (&cadastro, sizeof(struct funcionario), 1, funcFile);
     if(&fwrite == 0){ /* Se conseguir gravar */
