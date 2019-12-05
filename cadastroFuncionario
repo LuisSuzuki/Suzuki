@@ -5,8 +5,10 @@
 #define TAMMAX 100
 
 struct funcionario{
-    double salario;
+    float salario;
     char nome[50];
     char telefone[11];
     char email[40];
 };
+
+struct funcionario funci;
