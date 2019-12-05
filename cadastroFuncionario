@@ -13,3 +13,7 @@ struct funcionario{
 
 struct funcionario funci;
 
+    printf("___________________\n\n");
+    printf("    CADASTRO DE    \n");
+    printf("    FUNCIONARIO    \n");
+    printf("___________________\n");
